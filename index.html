@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProCalc</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- ── CALCULATOR ── -->
+      <div class="calc">
+        <div class="topbar">
+          <div class="brand">
+            <div class="brand-icon">
+              <svg viewBox="0 0 12 12">
+                <rect x="0" y="0" width="5" height="5" rx="1" />
+                <rect x="7" y="0" width="5" height="5" rx="1" />
+                <rect x="0" y="7" width="5" height="5" rx="1" />
+                <rect x="7" y="7" width="5" height="5" rx="1" />
+              </svg>
+            </div>
+            <span class="brand-name">ProCalc</span>
+          </div>
+          <div class="mode-toggle">
+            <button
+              class="mode-btn active"
+              id="modeStd"
+              onclick="setMode('std')"
+            >
+              Standard
+            </button>
+            <button class="mode-btn" id="modeSci" onclick="setMode('sci')">
+              Scientific
+            </button>
+          </div>
+        </div>
+
+        <div class="display">
+          <div class="hist-line" id="histLine"></div>
+          <div class="expr-line" id="exprLine"></div>
+          <div class="main-num" id="mainNum">0</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Scientific row (hidden by default) -->
+        <div class="sci-grid" id="sciGrid" style="display: none">
+          <button class="sci" onclick="sciOp('sin')">sin</button>
+          <button class="sci" onclick="sciOp('cos')">cos</button>
+          <button class="sci" onclick="sciOp('tan')">tan</button>
+          <button class="sci" onclick="sciOp('log')">log</button>
+          <button class="sci" onclick="sciOp('ln')">ln</button>
+          <button class="sci" onclick="sciOp('sin⁻¹')">sin⁻¹</button>
+          <button class="sci" onclick="sciOp('cos⁻¹')">cos⁻¹</button>
+          <button class="sci" onclick="sciOp('tan⁻¹')">tan⁻¹</button>
+          <button class="sci" onclick="sciOp('√')">√</button>
+          <button class="sci" onclick="sciOp('x²')">x²</button>
+          <button class="sci" onclick="sciOp('xⁿ')">xⁿ</button>
+          <button class="sci" onclick="sciOp('|x|')">|x|</button>
+          <button class="sci" onclick="sciOp('n!')">n!</button>
+          <button class="sci" onclick="insertConst('π')">π</button>
+          <button class="sci" onclick="insertConst('e')">e</button>
+        </div>
+
+        <!-- Standard grid -->
+        <div class="grid">
+          <!-- Row 1 -->
+          <button class="fn clear-btn" onclick="doClear()">AC</button>
+          <button class="fn" onclick="doSign()">+/−</button>
+          <button class="fn" onclick="doPct()">%</button>
+          <button class="op" onclick="doOp('÷')">÷</button>
+          <!-- Row 2 -->
+          <button onclick="digit('7')">7</button>
+          <button onclick="digit('8')">8</button>
+          <button onclick="digit('9')">9</button>
+          <button class="op" onclick="doOp('×')">×</button>
+          <!-- Row 3 -->
+          <button onclick="digit('4')">4</button>
+          <button onclick="digit('5')">5</button>
+          <button onclick="digit('6')">6</button>
+          <button class="op" onclick="doOp('−')">−</button>
+          <!-- Row 4 -->
+          <button onclick="digit('1')">1</button>
+          <button onclick="digit('2')">2</button>
+          <button onclick="digit('3')">3</button>
+          <button class="op" onclick="doOp('+')">+</button>
+          <!-- Row 5 -->
+          <button class="span2" onclick="digit('0')">0</button>
+          <button onclick="doDot()">.</button>
+          <button class="eq" onclick="doEquals()">=</button>
+        </div>
+
+        <div class="status-bar">
+          <button class="status-deg" id="degBtn" onclick="toggleDeg()">
+            DEG
+          </button>
+          <span class="status-mem" id="memStatus">M: —</span>
+        </div>
+      </div>
+
+      <!-- ── HISTORY PANEL ── -->
+      <div class="history-panel">
+        <div class="hist-header">
+          <span class="hist-title">History</span>
+          <button class="hist-clear" onclick="clearHistory()">Clear</button>
+        </div>
+        <div class="hist-list" id="histList">
+          <div class="hist-empty">No calculations yet</div>
+        </div>
+        <div class="mem-bar">
+          <span class="mem-badge" id="mMinus">M−</span>
+          <span class="mem-badge" id="mPlus">M+</span>
+          <span
+            class="mem-badge"
+            id="mR"
+            style="cursor: pointer"
+            onclick="memRecall()"
+            >MR</span
+          >
+          <span
+            class="mem-badge"
+            id="mC"
+            style="cursor: pointer"
+            onclick="memClear()"
+            >MC</span
+          >
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
